@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import EditEvent from './EditEvent'
+import AddEvent from './AddEvent'
 
 function Events() {
 
@@ -20,6 +21,8 @@ function Events() {
         fees: 0
     })
 
+    const [addEvent, setAddEvent] = useState(false)
+
     const handleEdit = e => {
         const id = parseInt(e.target.dataset.id)
         const event = events.find(event => event.id === parseInt(id))
@@ -33,6 +36,17 @@ function Events() {
         setEvents([...events.slice(0, index), event, ...events.slice(index+1)])
         setEditEvent({id: 0, name: '', date: '', location: '', description: '', fees: 0})
         console.log('events updated:', [...events.slice(0, index), event, ...events.slice(index + 1)])
+    }
+
+    const toogleShow = () => {
+        setAddEvent(!addEvent)
+    }
+
+    const handleAdd = e => {
+        e.id = events.length + 1
+        setEvents([...events, e])
+        console.log('events updated:', [...events, e])
+        setAddEvent(false)
     }
 
   return (
@@ -69,6 +83,12 @@ function Events() {
                 }
             </tbody>
         </table>
+        <button onClick={toogleShow}>Add</button>
+
+        <AddEvent
+            display={addEvent}
+            handleAdd={handleAdd}
+        />
 
           <EditEvent 
               {...editEvent}

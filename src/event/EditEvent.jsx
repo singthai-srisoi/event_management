@@ -42,6 +42,14 @@ function EditEvent({id=0, name="", date="", location="", description="", fees=""
         )
     } 
 
+    const handleCancel = () => {
+        setName('')
+        setDate('')
+        setLocation('')
+        setDescription('')
+        setFees('')
+    }
+
 return (
     <>
           <form onInput={handleInput} onSubmit={Submit}
@@ -74,9 +82,9 @@ return (
                       <tr>
                           <th></th>
                           <td>
-                              <input type="submit" value="Submit" disabled={IsEmpty()} />
+                              <input type="submit" value="Save" disabled={IsEmpty()} />
                               <input type="reset" value="Reset" onClick={handleReset} />
-                              <input type="button" value="Cancel" />
+                              <input type="button" value="Cancel" onClick={handleCancel}/>
                           </td>
                       </tr>
 
